@@ -19,7 +19,7 @@ class Vampire {
     return this.offspring.length;
   }
 
-  // Returns the number of vampires away from the original vampire this vampire is
+  // Retuarrayrns the number of vampires away from the original vampire this vampire is
   get numberOfVampiresFromOriginal() {
     let numberOfVamps = 0;
     let currentVamp = this;
@@ -31,7 +31,11 @@ class Vampire {
   }
 
   // Returns true if this vampire is more senior than the other vampire. (Who is closer to the original vampire)
-  isMoreSeniorThan(vampire) {}
+  isMoreSeniorThan(vampire) {
+    return (
+      this.numberOfVampiresFromOriginal < vampire.numberOfVampiresFromOriginal
+    );
+  }
 
   /** Stretch **/
 
@@ -42,5 +46,43 @@ class Vampire {
   // * when comparing Ansel and Andrew, Ansel is the closest common anscestor.
   closestCommonAncestor(vampire) {}
 }
+// Returns the vampire object with that name, or null if no vampire exists with that name
+vampireWithName(name) {
+if (this.name === name){
+  return this;
+}
+let vamp;
+for (var offspring of this.offspring){
+  vamp = offspring.vampireWithName(name)
+  if(vamp!== null){
+    return vamp;
+  }
+}
+return null
+}
 
+// Returns the total number of vampires that exist
+get totalDescendents() {
+let total = 0;
+total += this.numberOfOffspring
+this.offspring.forEach(element => {
+  total+=element.total
+});
+return totalDescendents
+}
+
+// Returns an array of all the vampires that were converted after 1980
+get allMillennialVampires() {
+let vampires = [];
+if(this.yearConverted > 1980) {
+  vampires.push(this);
+}
+for (const offspring of this.offspring){
+  const nVamp = offspring.allMillennialVampires;
+  if(nVamp!== null){
+    vampires = vampires.concat(nVamp);
+  }
+}
+return vampires;
+}
 module.exports = Vampire;
